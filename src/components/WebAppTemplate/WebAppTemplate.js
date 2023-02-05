@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Nav from './Nav';
+import Nav from '../Nav/Nav';
+import s from './WebAppTemplate.module.css';
 
 function WebAppTemplate() {
   return (
     <>
-      <header>
+      <header className={s.header}>
         <Nav />
       </header>
       <main>

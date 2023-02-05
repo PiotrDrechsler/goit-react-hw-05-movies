@@ -1,0 +1,29 @@
+.link {
+  text-decoration: none;
+}
+
+.backBtn {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  padding: 15px;
+  border-bottom: 2px solid black;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  padding-top: 0;
+}
+
+.additional {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-bottom: 2px solid black;
+}
