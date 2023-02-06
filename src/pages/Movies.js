@@ -5,28 +5,29 @@ import { useSearchParams, NavLink, useLocation } from 'react-router-dom';
 const Movies = () => {
   const [movies, setSearchedMovie] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
+  const { query } = searchParams;
   const location = useLocation();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams(query !== '' ? { query: form.elements.query.value } : {});
+    const newQuery = form.elements.query.value;
+    setSearchParams(newQuery !== '' ? { query: newQuery } : {});
     form.reset();
   };
 
   useEffect(() => {
-    if (query === '' || query === null) return;
+    if (!query) return;
     getQuery(query).then(setSearchedMovie);
   }, [query]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="query"></input>
-        <button type="submit">Search</button>
-      </form>
-      {movies.length > 0 ? (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="query" defaultValue={query || ''} />
+      <button type="submit">Search</button>
+      {movies.length === 0 && query ? (
+        <div>No results. Please try again.</div>
+      ) : (
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
@@ -36,10 +37,8 @@ const Movies = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        query && <div>No results. Please try again.</div>
       )}
-    </>
+    </form>
   );
 };
 
